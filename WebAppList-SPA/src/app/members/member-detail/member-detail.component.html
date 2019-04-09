@@ -1,0 +1,60 @@
+<div class="container mt-4">
+    <div class="row">
+        <h1>Detalles de {{user.knownAs}}</h1>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card">
+                <img class="card-img-top img-thumbnail" src="{{user.photoUrl || '..\\..\\..\\assets\\user.png'}}" alt="{{user.knownAs}}">
+                <div class="card-body">
+                    <div>
+                        <strong>Ubicación:</strong>
+                        <p>{{user.city}}, {{user.country}}</p>
+                    </div>
+                    <div>
+                        <strong>Edad:</strong>
+                        <p>{{user.age}}</p>
+                    </div>
+                    <div>
+                        <strong>Última modificación:</strong>
+                        <p>{{user.lastActive | timeAgo}}</p>
+                    </div>
+                    <div>
+                        <strong>Antiguedad:</strong>
+                        <p>{{user.created | date: 'mediumDate'}}</p>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="btn-group d-flex">
+                        <button class="btn btn-primary w100">Like</button>
+                        <button class="btn btn-success w100" (click)="selectTab(3)">Message</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="tab-panel">
+                <tabset class="member-tabset" #memberTabs>
+                    <tab heading="About {{user.knownAs}}">
+                        <h4>Description</h4>
+                        <p>{{user.introduction}}</p>
+                        <h4>Looking For</h4>
+                        <p>{{user.lookingFor}}</p>
+                    </tab>
+                    <tab heading="Interests">
+                        <h4>Interests</h4>
+                        <p>{{user.interests}}</p>
+                    </tab>
+                    <tab heading="Photos">
+                        <h4>Photos</h4>
+                        <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+                    </tab>
+                    <tab heading="Messages">
+                        <h4>Messages</h4>
+                        <app-member-messages [recipientId]="user.id"></app-member-messages>
+                    </tab>
+                </tabset>
+            </div>
+        </div>
+    </div>
+</div>
